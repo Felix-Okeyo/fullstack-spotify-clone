@@ -1,4 +1,5 @@
 "use client";
+
 import {TbPlaylist} from "react-icons/tb" //playlist icon
 import {AiOutlinePlus} from "react-icons/ai" // the + icon
 
