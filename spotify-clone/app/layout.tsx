@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Figtree } from 'next/font/google'
 import './globals.css'
+import Sidebar from '@/components/Sidebar'
 
 const font = Figtree({ subsets: ['latin'] }) //rename import from font to figtree
 
@@ -16,7 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        {/* wrap the layout of the app with the sidebar 
+        component kind of like you do with the navbar */}
+      
+        <Sidebar> 
+          {children}
+        </Sidebar>
+      </body>
     </html>
   )
 }
