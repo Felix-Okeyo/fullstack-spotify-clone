@@ -51,7 +51,14 @@ const Header = ({
           <div className="flex justify-betweenn items-center gap-x-4">
             <>
               <div>
-                <Button>
+                <Button 
+                  className="bg-transparent text-neutral-300 font-medium">
+                  Sign Up
+                </Button>              
+              </div>
+              <div>
+                <Button 
+                  className="bg-transparent text-neutral-300 font-medium">
                   Sign Up
                 </Button>              
               </div>
