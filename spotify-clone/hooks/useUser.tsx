@@ -39,4 +39,4 @@ export interface Props {
     const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
     const [subscription, setSubscription] = useState<Subscription | null>(null);
 
-  }
+}
