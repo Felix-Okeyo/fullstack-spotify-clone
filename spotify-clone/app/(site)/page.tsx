@@ -24,7 +24,7 @@ const Home=()=> {
         </h1>
       </div>
       <div>
-          List of Songs added!
+          List of Songs!
       </div>
     </div>
     </div>
