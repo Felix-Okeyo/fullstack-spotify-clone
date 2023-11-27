@@ -19,20 +19,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={font.className}>
-        {/* wrap the layout of the app with the sidebar 
-        component kind of like you do with the navbar */}
-        <SupabaseProvider>
-          <UserProvider>
-            <ModalProvider>
-            <Sidebar> 
-              {children}
-            </Sidebar>
-            </ModalProvider>
-          </UserProvider>
-        </SupabaseProvider>
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body className={font.className}>
+          {/* wrap the layout of the app with the sidebar 
+          component kind of like you do with the navbar */}
+          <SupabaseProvider>
+            <UserProvider>
+              <ModalProvider>
+                <Sidebar> 
+                  {children}
+                </Sidebar>
+              </ModalProvider>
+            </UserProvider>
+          </SupabaseProvider>
+        </body>
+      </html>
+    </>
+    
   )
 }
