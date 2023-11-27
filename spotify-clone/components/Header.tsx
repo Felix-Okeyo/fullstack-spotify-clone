@@ -42,8 +42,7 @@ const Header:React.FC<HeaderProps> = ({
                       cursor-pointer hover:opacity-75 transition">
                       <HiHome className="text-black" size={20} />
                   </button>
-                  <button
-                      className="rounded-full p-2 bg-white flex items-center justify-center 
+                  <button className="rounded-full p-2 bg-white flex items-center justify-center 
                       cursor-pointer hover:opacity-75 transition">
                       <BiSearch className="text-black" size={20} />
                   </button>
