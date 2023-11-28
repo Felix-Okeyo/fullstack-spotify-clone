@@ -26,11 +26,10 @@ export default function RootLayout({
           component kind of like you do with the navbar */}
           <SupabaseProvider>
             <UserProvider>
-              <ModalProvider>
+              <ModalProvider />
                 <Sidebar> 
                   {children}
                 </Sidebar>
-              </ModalProvider>
             </UserProvider>
           </SupabaseProvider>
         </body>
