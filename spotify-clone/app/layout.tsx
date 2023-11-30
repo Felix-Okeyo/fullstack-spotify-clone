@@ -5,6 +5,7 @@ import Sidebar from '@/components/Sidebar'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProviders'
 import ModalProvider from '@/providers/ModalProvider'
+import ToasterProvider from '@/providers/ToasterProvider'
 
 const font = Figtree({ subsets: ['latin'] }) //rename import from font to figtree
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <body className={font.className}>
           {/* wrap the layout of the app with the sidebar 
           component kind of like you do with the navbar */}
+          <ToasterProvider />
           <SupabaseProvider>
             <UserProvider>
               <ModalProvider />
