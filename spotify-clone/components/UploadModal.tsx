@@ -10,6 +10,7 @@ import Modal from './Modal'
 import useUploadModal from '@/hooks/useUploadModal';
 import Input from './Input';
 import Button from './Button';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -19,6 +20,7 @@ function UploadModal() {
     const [isLoading, setIsLoading ] = useState(false);
     const { user } = useUser();
     const supabaseClient = useSupabaseClient();
+    const router = useRouter();
 
 
     const {register,handleSubmit,reset} = useForm<FieldValues>({
@@ -57,7 +59,7 @@ function UploadModal() {
             //unique id to store songs
             const uniqueId = uniqid()
             
-            //upload the song to supbase server
+            //upload the song to supabase server
             const {
                 data: songData,
                 error: songError,
@@ -71,7 +73,45 @@ function UploadModal() {
                 setIsLoading(false);
                 return toast.error('Failed to upload song')
             }
+            
+            //upload image
+            const {
+                data: imageData,
+                error: imageError,
+            } = await supabaseClient.storage.from('images').upload(`image-${values.title}-${uniqueId}`, imageFile, 
+            {
+                cacheControl: '3600',
+                upsert: false, 
+            })
 
+            // handle imgae upload error
+            if (imageError) {
+                setIsLoading(false);
+                return toast.error('Failed to upload image ');
+              }
+
+            //if there were no image and song upload errors create a new entry in the database
+            // use an sql query to add new entry to the database
+            const { error: supabaseError } = await supabaseClient
+            .from('songs').insert({
+                                    user_id: user.id,
+                                    title: values.title,
+                                    author: values.author,
+                                    image_path: imageData.path,
+                                    song_path: songData.path
+                                });
+            
+            // if there was an error in adding the new song to the db
+            if (supabaseError) {
+                return toast.error(supabaseError.message);
+              }
+            //however if everything went well then
+            router.refresh(); // vital when listing the songs
+            setIsLoading(false);
+            toast.success('Song created successfully!');
+            reset(); //reset the upload form
+            uploadModal.onClose(); //close the upload component 
+              
         } catch (error) {
             toast.error('Error uploading song')
         } finally {
@@ -119,7 +159,7 @@ function UploadModal() {
                     type ='file'
                     disabled ={isLoading}
                     accept='image/*'
-                    {...register('song', { required: true })}
+                    {...register('image', { required: true })}
                     />
             </div>
             <Button disabled={isLoading} type ='submit'>
