@@ -5,8 +5,19 @@ import {AiOutlinePlus} from "react-icons/ai" // the + icon
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
+import { Song } from "@/types";
+import MediaItem from "./MediaItem";
 
-const Library = ()=> {
+
+// create the props being songs, that are to be passed to the Library component
+interface LibraryProps {
+    songs: Song[];
+}
+
+//extract them and pass them to the component
+const Library:React.FC<LibraryProps> = ({
+    songs
+})=> {
     const authModal =  useAuthModal();
     const { user } = useUser();
     // add uploadmodel  hook here 
@@ -32,7 +43,9 @@ const Library = ()=> {
             className= "text-neutral-400 coursor-pointer hover:text-white transition"/>
         </div>
         <div className="flex flex-col gap-y-2 mt-4 px-3">
-            List of Songs!
+            {songs.map((item)=>(
+                < MediaItem onClick={() => {}} key ={item.id} data = {item}/>
+            ))}
 
         </div>
     </div>
