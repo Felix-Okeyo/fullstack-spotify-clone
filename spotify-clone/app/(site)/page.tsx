@@ -1,6 +1,7 @@
 import getSongs from "@/actions/getSongs";
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
+import PageContent from "./components/PageContent";
 
 export const revalidate = 0;//this page will not be cached and the data will always be up to date
 
@@ -27,10 +28,8 @@ export default async function Home () {
           Newest Songs
         </h1>
       </div>
-      <div>
-          {songs.map((song)=> <div>{song.title}</div>)}
+      <PageContent songs={songs}/>
       </div>
-    </div>
     </div>
   )
 }
