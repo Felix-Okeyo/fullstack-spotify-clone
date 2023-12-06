@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import getLikedSongs from "@/actions/getLikedSongs";
 import Header from "@/components/Header";
-import getSongs from "@/actions/getSongs";
+import LikedContent from "./components/LikedContent";
 
 
 
