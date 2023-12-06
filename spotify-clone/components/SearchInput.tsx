@@ -1,6 +1,7 @@
 "use client";
 
 const SearchInput = () => {
+    //give the component functionalities
 
     return (
         <div>
