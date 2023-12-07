@@ -9,6 +9,8 @@ interface PlayerStore {
   reset: () => void;
 }
 
+//logic of how the player functionality will be implemented
+// set id in a playlist and current id to be played and where to play
 const usePlayer = create<PlayerStore>((set) => ({
   ids: [],
   activeId: undefined,
