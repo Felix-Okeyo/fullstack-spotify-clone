@@ -3,6 +3,7 @@
 import usePlayer from "@/hooks/usePlayer";
 import useGetSongById from "@/hooks/useGetSongById";
 import useLoadSongUrl from "@/hooks/useLoadSongUrl";
+import PlayerContent from "./PlayerContent";
 
 const Player = () => {
     //hooks
@@ -31,10 +32,17 @@ const Player = () => {
  
   return (
     <div className="fixed bottom-0 bg-black w-full py-2 h-[80px] px-4">
-        Player
+        
+        <PlayerContent key ={songUrl}song ={song} songUrl={songUrl}/>
         
     </div>
   )
 }
 
 export default Player; 
+
+{/*This component now executed the playing of the music and is wrapped in the player
+    component 
+    Assigning it a key allows it to be dynamic and be destroyed everytime you load or skip 
+    to another song.
+*/}
