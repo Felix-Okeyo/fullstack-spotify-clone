@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
+import useOnPlay from "@/hooks/useOnPlay";
 
 
 // create the props being songs, that are to be passed to the Library component
@@ -32,6 +33,10 @@ const Library:React.FC<LibraryProps> = ({
 
         return uploadModal.onOpen();
     }
+    //add onplay functionality to songs in the library as well 
+    const onPlay = useOnPlay(songs);
+
+
   return (
     <div className = "flex flex-col">
         <div className="flex items-center justify-between px-5 pt-4">
@@ -44,7 +49,7 @@ const Library:React.FC<LibraryProps> = ({
         </div>
         <div className="flex flex-col gap-y-2 mt-4 px-3">
             {songs.map((item)=>(
-                < MediaItem onClick={() => {}} key ={item.id} data = {item}/>
+                < MediaItem onClick={(id: string) => onPlay(id)} key ={item.id} data = {item}/>
             ))}
 
         </div>

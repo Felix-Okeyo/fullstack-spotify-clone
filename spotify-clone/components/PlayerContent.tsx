@@ -133,7 +133,7 @@ const PlayerContent: React.FC<PlayerContentProps>=({
               <div onClick={()=>{}} 
                 className="h-10 w-10 flex items-center justify-center rounded-full bg-white p-1 cursor-pointer">
              
-                <Icon size={30} className="text-black" />
+                <Icon onClick={handlePlay} size={30} className="text-black" />
               </div>
             </div>
     
@@ -142,10 +142,10 @@ const PlayerContent: React.FC<PlayerContentProps>=({
                     <AiFillStepBackward onClick={onPlayPrevious} size={30} 
                         className="text-neutral-400 cursor-pointer hover:text-white transition"/>
               </div>
-              <div onClick={()=>{}} 
+              <div onClick={handlePlay} 
                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer">
                 
-                    <Icon size={30} className="text-black" />
+                    <Icon onClick={handlePlay} size={30} className="text-black" />
               </div>
               <div>
                     <AiFillStepForward onClick={onPlayNext} size={30} 
