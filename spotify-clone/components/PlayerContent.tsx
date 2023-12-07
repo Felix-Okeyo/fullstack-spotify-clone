@@ -1,15 +1,17 @@
 "use client";
 
 import { BsPauseFill, BsPlayFill } from "react-icons/bs"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import useSound from "use-sound";
 
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
 import LikeButton from "./LikeButton";
 import Slider from "./Slider";
 import usePlayer from "@/hooks/usePlayer";
+
 
 
 interface PlayerContentProps {
@@ -77,6 +79,46 @@ const PlayerContent: React.FC<PlayerContentProps>=({
         player.setId(previousSong);
       }
 
+    const [play, { pause, sound }] = useSound(
+        songUrl,
+        { 
+          volume: volume,
+          onplay: () => setIsPlaying(true),
+          onend: () => {
+            setIsPlaying(false);
+            onPlayNext();
+          },
+          onpause: () => setIsPlaying(false),
+          format: ['mp3']
+        }
+    );
+    //useEffect to play the song only when the component is loaded with a song
+    useEffect(() => {
+        sound?.play();
+        
+        return () => {
+          sound?.unload();
+        }
+      }, [sound]);
+    
+    const handlePlay = () => {
+        //if not playing, play else pause
+        if (!isPlaying) {
+          play();
+        } else {
+          pause();
+        }
+      }
+    
+    //if volume is zero, set volume to one otherwise set to zero
+      const toggleMute = () => {
+        if (volume === 0) {
+          setVolume(1);
+        } else {
+          setVolume(0);
+        }
+      }
+
     return ( 
         <div className="grid grid-cols-2 md:grid-cols-3 h-full">
             <div className="flex w-full justify-start">
@@ -114,8 +156,8 @@ const PlayerContent: React.FC<PlayerContentProps>=({
     
             <div className="hidden md:flex w-full justify-end pr-2">
               <div className="flex items-center gap-x-2 w-[120px]">
-                 <VolumeIcon onClick={()=>{}} className="cursor-pointer" size={34} /> 
-                <Slider onChange={()=>{}} /> 
+                 <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={34} /> 
+                <Slider value={volume} onChange={(value)=>setVolume(volume)} /> 
               </div>
             </div>
     
