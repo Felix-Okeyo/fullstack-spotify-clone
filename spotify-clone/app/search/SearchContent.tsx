@@ -2,6 +2,7 @@
 
 import LikeButton from "@/components/LikeButton";
 import MediaItem from "@/components/MediaItem";
+import useOnPlay from "@/hooks/useOnPlay";
 import { Song } from "@/types";
 
 
@@ -12,6 +13,9 @@ interface SearchContentProps {
 const SearchContent: React.FC<SearchContentProps> = ({
   songs
 }) => {
+
+  //add playing or loading onplay song to songs in the search content page
+  const onPlay = useOnPlay(songs);
   
 
   //check it there are no songs
@@ -28,7 +32,7 @@ const SearchContent: React.FC<SearchContentProps> = ({
         {songs.map((song)=>(
             <div key={song.id} className="flex items-center gap-x-4 w-full">
                 <div className="flex-1"> {/* using flex allow you to have items side by side on same line*/}
-                    <MediaItem onClick={()=>{}} data={song}/>
+                    <MediaItem onClick={(id: string)=>(onPlay(id))} data={song}/>
                 </div>
                 {/*  add like button} */}
                 <LikeButton songId={song.id}/>
