@@ -1,1 +1,5 @@
 this folder handles the creation of the webhook after handling the helpers 
+
+
+in development, the stripe webhook should be running to test the link between stripe product
+adding and realtime integration to stripe. failure will lead to sync errors 
