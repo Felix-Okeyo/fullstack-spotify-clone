@@ -8,8 +8,6 @@ export const revalidate = 0;//this page will not be cached and the data will alw
 export default async function Home () {
   const songs = await getSongs();
 
-  throw new Error('Test')
-
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto"> 
     <Header>
