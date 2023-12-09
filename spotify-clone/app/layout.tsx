@@ -24,6 +24,9 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const userSongs = await getSongsByUserId();
+    
+  // throw new Error('Test')
+
   return (
     <>
       <html lang="en">
