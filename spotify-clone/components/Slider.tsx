@@ -1,3 +1,5 @@
+//moves the songs upwards once the player starts playing the loaded song
+
 "use client"
 
 import * as RadixSlider from "@radix-ui/react-slider";
@@ -26,14 +28,12 @@ const Slider:React.FC<SliderProps> = ({
         max={1}
         step={0.1}
         arial-label="Volume">
-            <RadixSlider.Track
-                className="bg-neutral-600 relative grow rounded-full h-[3px]">
-                    <RadixSlider.Range
-                        className="absolute bg-white rounded-full h-full">
-
-                    </RadixSlider.Range>
+            <RadixSlider.Track className="bg-neutral-600 relative grow rounded-full h-[3px]">
+                    
+                    <RadixSlider.Range className="absolute bg-white rounded-full h-full" />
+            
             </RadixSlider.Track>
-
+            
     </RadixSlider.Root>
   )
 }
