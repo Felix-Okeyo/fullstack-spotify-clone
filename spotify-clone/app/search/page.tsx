@@ -31,4 +31,4 @@ const Search = async ({ searchParams}: SearchProps) => {
     )
 }     
 
-export default Search 
+export default Search; 
