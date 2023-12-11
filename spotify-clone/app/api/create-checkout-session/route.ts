@@ -14,19 +14,21 @@ export async function POST(
   const { price, quantity = 1, metadata = {} } = await request.json();
 
   try {
-    const supabase = createRouteHandlerClient({ cookies });      
-      
-      const {data: { user }} = await supabase.auth.getUser();
+    const supabase = createRouteHandlerClient({ 
+      cookies
+      });      const {
+      data: { user }
+    } = await supabase.auth.getUser();
 
-    const customer = await createOrRetrieveCustomer(
-        { uuid: user?.id || '',
-        email: user?.email || ''}
-    );
-        //@ts-ignore
+    const customer = await createOrRetrieveCustomer({
+      uuid: user?.id || '',
+      email: user?.email || ''
+    });
+
     const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        billing_address_collection: 'required',
-        customer,
+      payment_method_types: ['card'],
+      billing_address_collection: 'required',
+      customer,
       line_items: [
         {
           price: price.id,
