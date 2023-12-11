@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
             const { error } = await supabaseClient.auth.signOut();
             //reset any playing songs
             player.reset();
-            
+
             router.refresh();
             //error handling when login out
             if (error) {

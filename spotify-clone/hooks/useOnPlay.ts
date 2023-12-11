@@ -10,7 +10,7 @@ import useSubscribeModal from "./useSubscribeModal";
 
 const useOnPlay = (songs: Song[]) => {
     
-  const SubscribeModal = useSubscribeModal();
+  // const SubscribeModal = useSubscribeModal();
   //get and mount to the player
   const player = usePlayer();
     
@@ -27,9 +27,9 @@ const useOnPlay = (songs: Song[]) => {
       return authModal.onOpen();
     }
     //if not subscribed sub as well 
-    if(!subscription){
-      return SubscribeModal.onOpen();
-    }
+    // if(!subscription){
+    //   return SubscribeModal.onOpen();
+    // }
 
 
     player.setId(id);
