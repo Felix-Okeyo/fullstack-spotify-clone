@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import usePlayer from "@/hooks/usePlayer";
 
 interface HeaderProps {
-    childen: React.ReactNode;
+    children: React.ReactNode;
     className?: string;
   }
   
