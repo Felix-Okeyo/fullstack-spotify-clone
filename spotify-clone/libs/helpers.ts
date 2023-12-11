@@ -20,32 +20,32 @@ export const getURL = () => {
 
 
 //creating a helper for fetching data based on the url configuration and in this case use the production url
-export const postData = async ({
-  url,
-  data
-}: {
-  url: string;
-  data?: { price: Price };
-}) => {
+export const postData = async ({ url, data }: { url: string; data?: { price: Price }; }) => {
   console.log('POSTING REQUEST,', url, data);
 
-  const res: Response = await fetch(url, {
-    method: 'POST',
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    credentials: 'same-origin',
-    body: JSON.stringify(data)
-  });
+  try {
+    const res: Response = await fetch(url, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'same-origin',
+      body: JSON.stringify(data || {}),
+    });
 
-  //error handling
-  if (!res.ok) {
-    console.log('Error in postData', { url, data, res });
+    if (!res.ok) {
+      console.error('Error in postData', { url, data, res });
+      throw new Error(`Error in postData: ${res.status} - ${res.statusText}`);
+    }
 
-    throw Error(res.statusText);
+    const responseData = await res.json();
+    console.log('POST request successful. Response:', responseData);
+
+    return responseData;
+  } catch (error) {
+    console.error('An error occurred in postData:', error);
+    throw error; // rethrow the error for further handling in calling functions
   }
-
-  //with no error, return the response
-  return res.json();
 };
+
 
 
 export const toDateTime = (secs: number) => {

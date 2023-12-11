@@ -8,6 +8,7 @@ import useUploadModal from "@/hooks/useUploadModal";
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
 import useOnPlay from "@/hooks/useOnPlay";
+import useSubscribeModal from "@/hooks/useSubscribeModal";
 
 
 // create the props being songs, that are to be passed to the Library component
@@ -19,8 +20,9 @@ interface LibraryProps {
 const Library:React.FC<LibraryProps> = ({
     songs
 })=> {
+    const subscribeModal = useSubscribeModal()
     const authModal =  useAuthModal();
-    const { user } = useUser();
+    const { user, subscription } = useUser();
     // add uploadmodel  hook here 
     const uploadModal = useUploadModal(); 
 
@@ -30,6 +32,9 @@ const Library:React.FC<LibraryProps> = ({
             return authModal.onOpen();
         }
         //check for subscriptions
+        if(!user){
+            return subscribeModal.onOpen();
+        }
 
         return uploadModal.onOpen();
     }

@@ -11,19 +11,29 @@ import { createOrRetrieveCustomer } from '@/libs/supabaseAdmin';
 export async function POST(
   request: Request
 ) {
-  const { price, quantity = 1, metadata = {} } = await request.json();
-
   try {
-    const supabase = createRouteHandlerClient({ 
-      cookies
-      });      const {
-      data: { user }
-    } = await supabase.auth.getUser();
+    const { price, quantity = 1, metadata = {} } = await request.json();
+    
+    //error handling here
+    console.log('Received request with data:', { price, quantity, metadata });
+
+    const supabase = createRouteHandlerClient({ cookies });      
+    const { data: { user } } = await supabase.auth.getUser();
+   
+    //error handling here
+    console.log('Supabase user:', user);
+
+    if (!user) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
 
     const customer = await createOrRetrieveCustomer({
       uuid: user?.id || '',
       email: user?.email || ''
     });
+    
+    //error handling here
+    console.log('Stripe customer', customer);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -44,10 +54,13 @@ export async function POST(
       success_url: `${getURL()}/account`,
       cancel_url: `${getURL()}/`
     });
+    //error handler
+    console.log('Created session:', session);
 
     return NextResponse.json({ sessionId: session.id });
   } catch (err: any) {
-    console.log(err);
+    console.log('Error in create-checkout-session:', err);
+    
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
