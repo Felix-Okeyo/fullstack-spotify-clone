@@ -53,7 +53,8 @@ export async function POST(
       },
       success_url: `${getURL()}/account`,
       cancel_url: `${getURL()}/`
-    });
+    }
+    );
     //error handler
     console.log('Created session:', session);
 
