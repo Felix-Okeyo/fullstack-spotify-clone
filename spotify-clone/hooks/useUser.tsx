@@ -43,10 +43,8 @@ export interface Props {
 
     //define functions that will now access the details of the user through this hook 
     const getUserDetails = () => supabase.from('users').select('*').single(); //get user details from supabase
-    
     //function for get subscriptions details from supabase
     const getSubscription = () => supabase.from('subscriptions').select('*, prices(*, products(*))').in('status', ['trialing', 'active']).single();
-    
     
   //the now use a useEffect to fetch the data and assign it to the MyUserContextProvider state
   useEffect(() => {
